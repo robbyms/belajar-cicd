@@ -13,11 +13,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check index.html
+      - name: Check index.html exists
         run: |
           echo "Checking index.html..."
           test -f index.html
           echo "index.html exists"
+
+      - name: Test HTML content
+        run: |
+          echo "Checking HTML content..."
+          grep -q "Hello CI/CD" index.html
+          echo "HTML content is correct"
+
+      - name: Validate HTML structure
+        run: |
+          grep -q "<html>" index.html
+          grep -q "</html>" index.html
+          echo "HTML structure check passed"
 
       - name: CI Success
         run: echo "CI PIPELINE SUCCESS"
